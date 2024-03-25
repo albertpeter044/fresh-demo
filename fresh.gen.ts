@@ -3,35 +3,39 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $_404 from "./routes/_404.tsx";
-import * as $_app_config from "./routes/_app.config.ts";
 import * as $_app from "./routes/_app.tsx";
 import * as $api_joke from "./routes/api/joke.ts";
 import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
 import * as $mapbox_draw_polygon from "./routes/mapbox/draw/polygon.tsx";
+import * as $react_hello from "./routes/react/hello.tsx";
 import * as $react_signal from "./routes/react/signal.tsx";
-import * as $Counter from "./islands/Counter.tsx";
 import * as $mapbox_draw_control_panel from "./islands/mapbox/draw/control-panel.tsx";
 import * as $mapbox_draw_draw_control from "./islands/mapbox/draw/draw-control.tsx";
 import * as $mapbox_draw_polygon_1 from "./islands/mapbox/draw/polygon.tsx";
+import * as $react_hello_1 from "./islands/react/hello.tsx";
+import * as $signal_Counter from "./islands/signal/Counter.tsx";
+import * as $signal_SignalCompute from "./islands/signal/SignalCompute.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
     "./routes/_404.tsx": $_404,
-    "./routes/_app.config.ts": $_app_config,
     "./routes/_app.tsx": $_app,
     "./routes/api/joke.ts": $api_joke,
     "./routes/greet/[name].tsx": $greet_name_,
     "./routes/index.tsx": $index,
     "./routes/mapbox/draw/polygon.tsx": $mapbox_draw_polygon,
+    "./routes/react/hello.tsx": $react_hello,
     "./routes/react/signal.tsx": $react_signal,
   },
   islands: {
-    "./islands/Counter.tsx": $Counter,
     "./islands/mapbox/draw/control-panel.tsx": $mapbox_draw_control_panel,
     "./islands/mapbox/draw/draw-control.tsx": $mapbox_draw_draw_control,
     "./islands/mapbox/draw/polygon.tsx": $mapbox_draw_polygon_1,
+    "./islands/react/hello.tsx": $react_hello_1,
+    "./islands/signal/Counter.tsx": $signal_Counter,
+    "./islands/signal/SignalCompute.tsx": $signal_SignalCompute,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

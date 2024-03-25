@@ -1,8 +1,8 @@
 import { type PageProps } from "$fresh/server.ts";
 import manifest from "@/fresh.gen.ts";
-import { initApp } from "@/routes/_app.config.ts";
+import "@/worker/watch.ts";
 export default function App({ Component }: PageProps) {
-  initApp()
+  // conf.mapbox.accessToken = conf.mapbox.accessToken || Deno.env.get("MAPBOX_TOKEN") || "";
   const routes = manifest.routes;
   const ignorePaths = ["_404.tsx", "_app.tsx", "index.tsx"];
   const routePaths = Object.keys(routes).map((p) => p.slice("./routes/".length))

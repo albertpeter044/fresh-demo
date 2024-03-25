@@ -7,6 +7,7 @@
     "start": "deno run -A --watch=static/,routes/ dev.ts",
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
+    "watch": "deno run -A worker/watch.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
   "lint": {
@@ -21,8 +22,8 @@
     "**/_fresh/*"
   ],
   "imports": {
-    "@islands/":"./islands/",
     "@/":"./",
+    "$utils/": "./utils/",
     "$fresh/": "../fresh/",
     "preact": "https://esm.sh/preact@10.19.2",
     "preact/": "https://esm.sh/preact@10.19.2/",
