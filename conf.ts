@@ -1,9 +1,5 @@
-import localConfig from "./conf/local.ts";
-export const conf = {
-  mapbox: {
-    accessToken: "",
-  },
-} as const;
+import conf from "./conf/default.ts";
+// import localConf from "./conf/local.ts";
+// Object.assign(conf, localConf)
+export {conf}
 
-// conf.mapbox.accessToken = conf.mapbox.accessToken || Deno.env.get("MAPBOX_TOKEN") || "";
-Object.assign(conf, localConfig)

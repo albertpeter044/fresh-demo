@@ -30,34 +30,37 @@ async function watchIslands() {
 
   // debounce(fn,1000);
   const islandHandler = (event: Deno.FsEvent) => {
-    const filepath = event.paths[0];
+    const islandPath = event.paths[0];
     if (
-      filepath.match(".tsx") && filepath.startsWith(rootDir) &&
-      !filepath.includes(" ")
+      islandPath.match(".tsx") && islandPath.startsWith(rootDir) &&
+      !islandPath.includes(" ")
     ) {
-      console.log("[%s] %s", event.kind, filepath);
-      const relpath = filepath.slice((rootDir + "/islands/").length);
+      console.log("[%s] %s", event.kind, islandPath);
+      const relpath = islandPath.slice((rootDir + "/islands/").length);
       const importIslandPath = "@/islands/" + relpath;
       const routeFile = rootDir + "/routes/" + relpath;
-      const routeDir = dirname(routeFile);
-      mkdir(routeDir);
       if (event.kind === "create" || event.kind == "modify") {
-        if (fileExists(filepath)) {
+        const content = `export {default} from  "${importIslandPath}";`;
+        const routeDir = dirname(routeFile);
+        mkdir(routeDir);
+        if (fileExists(islandPath)) {
           if (fileExists(routeFile)) {
             return;
           }
+          if (!Deno.readTextFileSync(islandPath).includes("export default ")) {
+            return;
+          }
           console.log(`write to file ${routeFile}`);
-          const content = `export {default} from  "${importIslandPath}";`;
           Deno.writeTextFileSync(routeFile, content);
         } else {
-          if (fileExists(routeFile)) {
+          if (
+            fileExists(routeFile) &&
+            Deno.readTextFileSync(routeFile).includes(content)
+          ) {
             console.log("remove file", routeFile);
             Deno.removeSync(routeFile);
           }
         }
-      } else if (event.kind === "remove") {
-        console.log("remove file", routeFile);
-        // Deno.removeSync(routeFile);
       }
     }
   };

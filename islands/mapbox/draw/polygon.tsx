@@ -1,28 +1,24 @@
-import { useState, useCallback } from 'preact/hooks';
-import Map from '@/3rd/react-map-gl/index.ts';
+import { useCallback, useState } from "preact/hooks";
+import Map from "@/3rd/react-map-gl/index.ts";
 
-import ControlPanel from './control-panel.tsx';
-import DrawControl from './draw-control.tsx';
-import { conf } from '@/conf.ts';
+import {DrawControl} from "./draw-control.tsx";
+import { useMapboxToken } from "@/context/app-context.ts";
 
-type FeaturesObject = { features: { id: string; }[]; };
+type FeaturesObject = { features: { id: string }[] };
 
-export function MapboxDrawPolygon() {
+export function MapboxDrawPolygon({ token }: { token: any }) {
   const [features, setFeatures] = useState({});
+  const mapbox_access_token = useMapboxToken();
+  console.log("read token from context:", { mapbox_access_token });
 
   const onUpdate = useCallback((e: FeaturesObject) => {
-    setFeatures(currFeatures => {
-      const newFeatures = { ...currFeatures } as any;
-      for (const f of e.features) {
-        newFeatures[f.id] = f;
-      }
-      return newFeatures;
-    });
+    console.log("polygon:", e.features[0]);
+    setFeatures(e.features[0]);
   }, []);
 
   const onDelete = useCallback((e: FeaturesObject) => {
-    setFeatures(currFeatures => {
-      const newFeatures = { ...currFeatures } as any;
+    setFeatures((currFeatures) => {
+      const newFeatures = { ...currFeatures } as Record<string, any>;
       for (const f of e.features) {
         delete newFeatures[f.id];
       }
@@ -31,22 +27,24 @@ export function MapboxDrawPolygon() {
   }, []);
 
   return (
-    <div>
+    <div class="h-5/6">
       <Map
+        className="mapx "
+        class="mapx2 "
         initialViewState={{
           longitude: -91.874,
           latitude: 42.76,
-          zoom: 12
+          zoom: 12,
         }}
         mapStyle="mapbox://styles/mapbox/satellite-v9"
-        mapboxAccessToken={conf.mapbox.accessToken}
+        mapboxAccessToken={token}
       >
         <DrawControl
           position="top-left"
           displayControlsDefault={false}
           controls={{
             polygon: true,
-            trash: true
+            trash: true,
           }}
           defaultMode="draw_polygon"
           onCreate={onUpdate!}
@@ -54,7 +52,9 @@ export function MapboxDrawPolygon() {
           onDelete={onDelete!}
         />
       </Map>
-      <ControlPanel polygons={Object.values(features)} />
+      <div class="pre">
+        features:{JSON.stringify(features)}
+      </div>
     </div>
   );
 }

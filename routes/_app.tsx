@@ -1,8 +1,11 @@
 import { type PageProps } from "$fresh/server.ts";
 import manifest from "@/fresh.gen.ts";
 import "@/worker/watch.ts";
+import { AppContext } from "@/context/app-context.ts";
+import { conf } from "@/conf.ts";
 export default function App({ Component }: PageProps) {
-  // conf.mapbox.accessToken = conf.mapbox.accessToken || Deno.env.get("MAPBOX_TOKEN") || "";
+  const mapbox_access_token = conf.mapbox.accessToken ||
+    Deno.env.get("MAPBOX_TOKEN") || "";
   const routes = manifest.routes;
   const ignorePaths = ["_404.tsx", "_app.tsx", "index.tsx"];
   const routePaths = Object.keys(routes).map((p) => p.slice("./routes/".length))
@@ -38,8 +41,10 @@ export default function App({ Component }: PageProps) {
             );
           })}
         </div>
-        <div class="flex-1 bg-slate-300">
-          <Component />
+        <div class="flex-1 bg-slate-30">
+          <AppContext.Provider value={{ mapbox_access_token }}>
+            <Component />
+          </AppContext.Provider>
         </div>
       </body>
     </html>

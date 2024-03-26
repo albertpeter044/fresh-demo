@@ -1,18 +1,15 @@
 import { MapboxDrawPolygon } from "@/islands/mapbox/draw/polygon.tsx";
-import { createContext } from "preact";
-import { useContext } from "preact/hooks";
-
-const CSP_CONTEXT = createContext<number | undefined>(10);
-function useCSP(mutator: (csp: number) => void) {
-  const csp = useContext(CSP_CONTEXT);
-  if (csp) {
-    mutator(csp);
-  }
-}
+import { useMapboxToken } from "@/context/app-context.ts";
+import { AppContext } from "@/context/app-context.ts";
 
 export default function App() {
-  useCSP((n) => {
-    console.log("CSP", n);
-  });
-  return <MapboxDrawPolygon />;
+  const mapbox_access_token = useMapboxToken();
+  if (!mapbox_access_token){
+    return <div>Please set `export MAPBOX_TOKEN=""`</div>
+  }
+  return (
+    <AppContext.Provider value={{ mapbox_access_token: "1234" }}>
+      <MapboxDrawPolygon token={mapbox_access_token}/>
+    </AppContext.Provider>
+  );
 }

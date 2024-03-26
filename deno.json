@@ -33,6 +33,8 @@
     "tailwindcss/": "npm:/tailwindcss@3.4.1/",
     "tailwindcss/plugin": "npm:/tailwindcss@3.4.1/plugin.js",
     "daisyui": "npm:daisyui@4.7.2",
+    "mapbox-gl": "npm:mapbox-gl",
+    "@mapbox/mapbox-gl-draw": "npm:@mapbox/mapbox-gl-draw",
     "$std/": "https://deno.land/std@0.211.0/"
 
   },

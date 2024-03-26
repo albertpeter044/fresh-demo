@@ -10,7 +10,6 @@ import * as $index from "./routes/index.tsx";
 import * as $mapbox_draw_polygon from "./routes/mapbox/draw/polygon.tsx";
 import * as $react_hello from "./routes/react/hello.tsx";
 import * as $react_signal from "./routes/react/signal.tsx";
-import * as $mapbox_draw_control_panel from "./islands/mapbox/draw/control-panel.tsx";
 import * as $mapbox_draw_draw_control from "./islands/mapbox/draw/draw-control.tsx";
 import * as $mapbox_draw_polygon_1 from "./islands/mapbox/draw/polygon.tsx";
 import * as $react_hello_1 from "./islands/react/hello.tsx";
@@ -30,7 +29,6 @@ const manifest = {
     "./routes/react/signal.tsx": $react_signal,
   },
   islands: {
-    "./islands/mapbox/draw/control-panel.tsx": $mapbox_draw_control_panel,
     "./islands/mapbox/draw/draw-control.tsx": $mapbox_draw_draw_control,
     "./islands/mapbox/draw/polygon.tsx": $mapbox_draw_polygon_1,
     "./islands/react/hello.tsx": $react_hello_1,
