@@ -10,7 +10,7 @@ import {
   MapWheelEvent,
   MapBoxZoomEvent
 } from 'npm:mapbox-gl';
-import {ErrorEvent as _ErrorEvent, ViewStateChangeEvent as _ViewStateChangeEvent} from './events';
+import {ErrorEvent as _ErrorEvent, ViewStateChangeEvent as _ViewStateChangeEvent} from './events.ts';
 
 export type {
   MapEvent,

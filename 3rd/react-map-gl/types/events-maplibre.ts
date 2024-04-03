@@ -9,8 +9,8 @@ import {
   MapSourceDataEvent,
   MapWheelEvent,
   MapLibreZoomEvent as MapBoxZoomEvent
-} from 'maplibre-gl';
-import {ErrorEvent as _ErrorEvent, ViewStateChangeEvent as _ViewStateChangeEvent} from './events';
+} from 'npm:maplibre-gl';
+import {ErrorEvent as _ErrorEvent, ViewStateChangeEvent as _ViewStateChangeEvent} from './events.ts';
 
 export type {
   MapEvent,

@@ -10,12 +10,18 @@ export default function App({ Component }: PageProps) {
   const ignorePaths = ["_404.tsx", "_app.tsx", "index.tsx"];
   const routePaths = Object.keys(routes).map((p) => p.slice("./routes/".length))
     .filter((v) => {
-      if (v.endsWith(".tsx")) {
+      if (v.match("\.(tsx|ts)$")) {
         return !ignorePaths.includes(v);
       }
       return false;
     }).map((v) => {
-      return v.slice(0, -4);
+      if (v.endsWith("/index.tsx")) {
+        return v.slice(0, -10);
+      } else if (v.endsWith(".ts")) {
+        return v.slice(0, -3);
+      } else {
+        return v.slice(0, -4);
+      }
     });
   return (
     <html>
@@ -24,6 +30,7 @@ export default function App({ Component }: PageProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>fresh-demo1</title>
         <link rel="stylesheet" href="/styles.css" />
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css' rel='stylesheet' />
       </head>
       <body class="flex min-h-screen">
         <div class="w-1/5 p-2 bg-green-300 border-r-2">

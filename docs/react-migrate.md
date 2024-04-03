@@ -29,6 +29,13 @@
         ....
     }
 
+## ReactElement
+代替
+
+    import { h, JSX } from 'preact';
+
+    const myComponent: JSX.Element
+
 ## css
 import type {CSSProperties} from 'preact/compat'
 

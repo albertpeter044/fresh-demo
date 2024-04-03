@@ -1,4 +1,5 @@
-import * as React from 'react';
+import * as preact from 'preact';
+import {JSX} from 'preact';
 import type {
   Map as MaplibreMap,
   MapOptions,
@@ -11,38 +12,40 @@ import type {
   GeolocateControl as MaplibreGeolocateControl,
   NavigationControl as MaplibreNavigationControl,
   ScaleControl as MaplibreScaleControl
-} from 'maplibre-gl';
-import {MapStyle, AnyLayer, AnySource} from './types/style-spec-maplibre';
+} from 'npm:maplibre-gl';
+import mapboxgl from 'mapbox-gl';
+import {MapStyle, AnyLayer, AnySource} from './types/style-spec-maplibre.ts';
 
-import {default as _Map, MapProps as _MapProps} from './components/map';
-import {default as _Marker, MarkerProps as _MarkerProps} from './components/marker';
-import {default as _Popup, PopupProps as _PopupProps} from './components/popup';
+import {default as _Map, MapProps as _MapProps} from './components/map.tsx';
+import {default as _Marker, MarkerProps as _MarkerProps} from './components/marker.ts';
+import {default as _Popup, PopupProps as _PopupProps} from './components/popup.ts';
 import {
   default as _AttributionControl,
   AttributionControlProps as _AttributionControlProps
-} from './components/attribution-control';
+} from './components/attribution-control.ts';
 import {
   default as _FullscreenControl,
   FullscreenControlProps as _FullscreenControlProps
-} from './components/fullscreen-control';
+} from './components/fullscreen-control.tsx';
 import {
   default as _GeolocateControl,
   GeolocateControlProps as _GeolocateControlProps
-} from './components/geolocate-control';
+} from './components/geolocate-control.ts';
 import {
   default as _NavigationControl,
   NavigationControlProps as _NavigationControlProps
-} from './components/navigation-control';
+} from './components/navigation-control.ts';
 import {
   default as _ScaleControl,
   ScaleControlProps as _ScaleControlProps
-} from './components/scale-control';
-import {default as _Layer, LayerProps as _LayerProps} from './components/layer';
-import {default as _Source, SourceProps as _SourceProps} from './components/source';
-import {useMap as _useMap} from './components/use-map';
-import type {MapRef as _MapRef} from './mapbox/create-ref';
-import type * as events from './types/events';
-import type {MapCallbacks} from './types/events-maplibre';
+} from './components/scale-control.ts';
+import {default as _Layer, LayerProps as _LayerProps} from './components/layer.ts';
+import {default as _Source, SourceProps as _SourceProps} from './components/source.ts';
+import {useMap as _useMap} from './components/use-map.tsx';
+import type {MapRef as _MapRef} from './mapbox/create-ref.ts';
+import type * as events from './types/events.ts';
+import type {MapCallbacks} from './types/events-maplibre.ts';
+import { RefAttributes, forwardRef } from "preact/compat";
 
 export function useMap() {
   return _useMap<MaplibreMap>();
@@ -50,22 +53,22 @@ export function useMap() {
 
 export type MapProps = _MapProps<MapOptions, MapStyle, MapCallbacks, MaplibreMap>;
 export type MapRef = _MapRef<MaplibreMap>;
-const mapLib = import('maplibre-gl');
+const mapLib = import('npm:maplibre-gl');
 export const Map = (() => {
-  return React.forwardRef(function Map(props: MapProps, ref: React.Ref<MapRef>) {
+  return forwardRef(function Map(props: MapProps, ref: preact.RefCallback<MapRef>) {
     return _Map<MapOptions, MapStyle, MapCallbacks, MaplibreMap>(props, ref, mapLib);
   });
 })();
 
 export type MarkerProps = _MarkerProps<MarkerOptions, MaplibreMarker>;
 export const Marker = _Marker as (
-  props: MarkerProps & React.RefAttributes<MaplibreMarker>
-) => React.ReactElement | null;
+  props: MarkerProps & RefAttributes<MaplibreMarker>
+) => React.ReactNode | null;
 
 export type PopupProps = _PopupProps<PopupOptions, MaplibrePopup>;
 export const Popup = _Popup as (
   props: PopupProps & React.RefAttributes<MaplibrePopup>
-) => React.ReactElement | null;
+) => ReactElement | null;
 
 type AttributionControlOptions = ConstructorParameters<typeof MaplibreAttributionControl>[0];
 export type AttributionControlProps = _AttributionControlProps<AttributionControlOptions>;
@@ -83,7 +86,7 @@ type NavigationControlOptions = ConstructorParameters<typeof MaplibreNavigationC
 export type NavigationControlProps = _NavigationControlProps<NavigationControlOptions>;
 export const NavigationControl = _NavigationControl as (
   props: NavigationControlProps
-) => React.ReactElement | null;
+) => JSX.Element | null;
 
 type GeolocateControlOptions = ConstructorParameters<typeof MaplibreGeolocateControl>[0];
 export type GeolocateControlProps = _GeolocateControlProps<
@@ -106,14 +109,14 @@ export const Layer = _Layer as (props: LayerProps) => React.ReactElement | null;
 export type SourceProps = _SourceProps<AnySource>;
 export const Source = _Source as (props: SourceProps) => React.ReactElement | null;
 
-export {default as useControl} from './components/use-control';
-export {MapProvider} from './components/use-map';
+export {default as useControl} from './components/use-control.ts';
+export {MapProvider} from './components/use-map.tsx';
 
 export default Map;
 
 // Types
-export * from './types/public';
-export type {default as Point} from '@mapbox/point-geometry';
+export * from './types/public.ts';
+export type {default as Point} from 'npm:@mapbox/point-geometry';
 export type {
   PointLike,
   LngLat,
@@ -127,8 +130,8 @@ export type {
   ImageSource,
   CanvasSource,
   VectorTileSource
-} from 'maplibre-gl';
-export * from './types/style-spec-maplibre';
+} from 'npm:maplibre-gl';
+export * from './types/style-spec-maplibre.ts';
 
 // Events
 export type {
@@ -143,7 +146,7 @@ export type {
   MapBoxZoomEvent,
   ErrorEvent,
   ViewStateChangeEvent
-} from './types/events-maplibre';
+} from './types/events-maplibre.ts';
 export type PopupEvent = events.PopupEvent<MaplibrePopup>;
 export type MarkerEvent = events.MarkerEvent<MaplibreMarker>;
 export type MarkerDragEvent = events.MarkerDragEvent<MaplibreMarker>;

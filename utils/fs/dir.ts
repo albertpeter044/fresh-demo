@@ -1,3 +1,14 @@
+export function statSync(filepath: string){
+  try {
+    return Deno.statSync(filepath);
+  } catch (error) {
+    if (error instanceof Deno.errors.NotFound) {
+      return false;
+    } else {
+      throw error;
+    }
+  }
+};
 
 export function existsSync(filename: string){
   try {

@@ -5,8 +5,8 @@ import type {
   Callbacks,
   LngLatLike,
   PointLike
-} from '../types';
-import type Mapbox from './mapbox';
+} from '../types/index.ts';
+import type Mapbox from './mapbox.ts';
 
 /** These methods may break the react binding if called directly */
 const skipMethods = [
