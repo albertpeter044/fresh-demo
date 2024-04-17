@@ -81,5 +81,7 @@ async function watchIslands() {
   }
 }
 if (Deno.mainModule.endsWith("/dev.ts") || import.meta.main) {
-  watchIslands();
+  if (Deno.env.get("FRESH_WATCH")) {
+    watchIslands();
+  }
 }
