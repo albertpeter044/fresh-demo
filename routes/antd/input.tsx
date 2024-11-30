@@ -1,1 +1,1 @@
-export {default} from  "@/islands/antd/input.tsx";
+export {default} from "@/islands/antd/input.tsx";

@@ -1,3 +1,4 @@
+// title: Render
 import { useEffect } from "preact/hooks";
 import { hydrate, render } from "preact";
 

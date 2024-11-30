@@ -1,6 +1,10 @@
 import { debounce as _debounce } from "$std/async/debounce.ts";
 import { dirname, fromFileUrl } from "$std/path/mod.ts";
 import { existsSync as fileExists, statSync } from "$utils/fs/dir.ts";
+import { readPartial } from "@/utils/fs/file.ts";
+import { RouteMetas } from "@/worker/RouteMetas.ts";
+
+const routeMetas = new RouteMetas()
 function getRootPath() {
   const dir = dirname(fromFileUrl(import.meta.url));
   return dirname(dir);
@@ -29,20 +33,23 @@ async function watchIslands() {
   );
 
   // debounce(fn,1000);
-  const islandHandlerRaw = (islandPath: string) => {
+  const islandHandlerRaw = async (islandPath: string) => {
     const relpath = islandPath.slice((rootDir + "/islands/").length);
     const importIslandPath = "@/islands/" + relpath;
     const routeFile = rootDir + "/routes/" + relpath;
-    const content = `export {default} from  "${importIslandPath}";`;
+    const content = `export {default} from "${importIslandPath}";`;
     const routeDir = dirname(routeFile);
     mkdir(routeDir);
     if (fileExists(islandPath)) {
       if (fileExists(routeFile)) {
         return;
       }
-      if (!Deno.readTextFileSync(islandPath).includes("export default ")) {
+      const islandContent = await readPartial(islandPath, 500)
+      if (!islandContent.includes("export default ")) {
         return;
       }
+      // const meta = parseIslandMeta(islandContent);
+      routeMetas.loadIslandContent(islandPath, content)
       console.log(`write to file ${routeFile}`);
       Deno.writeTextFileSync(routeFile, content);
     } else {

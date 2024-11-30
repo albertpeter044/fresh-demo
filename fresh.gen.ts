@@ -30,7 +30,7 @@ import * as $react_vnode_vnode_mutable_1 from "./islands/react/vnode/vnode-mutab
 import * as $signal_Counter from "./islands/signal/Counter.tsx";
 import * as $signal_SignalCompute from "./islands/signal/SignalCompute.tsx";
 import * as $video_ffmpeg_wasm_1 from "./islands/video/ffmpeg-wasm.tsx";
-import { type Manifest } from "$fresh/server.ts";
+import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
