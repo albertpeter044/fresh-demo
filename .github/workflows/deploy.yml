@@ -29,7 +29,7 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "albertpeter-fresh-demo-30"
+          project: "albertpeter-fresh-demo-58"
           entrypoint: "main.ts"
           root: "."
           
